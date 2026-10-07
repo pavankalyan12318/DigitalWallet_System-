@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:wallettest;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+app:
+  jwt:
+    secret: test-secret-that-is-long-enough-for-hs256-tests-only
+    expiration-ms: 3600000
+
+stripe:
+  api-key: sk_test_placeholder
+  webhook-secret: whsec_placeholder
+  currency-default: usd
