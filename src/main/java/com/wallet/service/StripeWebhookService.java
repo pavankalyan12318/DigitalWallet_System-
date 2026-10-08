@@ -22,6 +22,13 @@ public class StripeWebhookService {
 
   @Transactional
   public void handlePaymentIntent(PaymentIntent intent) {
+
+    System.out.println("===== STRIPE WEBHOOK =====");
+    System.out.println("PaymentIntent ID: " + intent.getId());
+    System.out.println("PaymentIntent status: " + intent.getStatus());
+    System.out.println("==========================");
+
+
     String status = intent.getStatus();
     if ("succeeded".equals(status)) {
       applySucceeded(intent.getId());

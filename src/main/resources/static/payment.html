@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wallet Test Payment</title>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+
+<body>
+
+<h2>Wallet Test Payment</h2>
+
+<div id="payment-element"></div>
+
+<br>
+
+<button id="pay-button">Pay ₹100</button>
+
+<p id="message"></p>
+
+<script>
+
+    const stripe = Stripe("pk_test_51UNyiYFesEkrvdhKA1xmqA7mOefnhEA3wYdi3jOzSvFTnn1Qn9xXeHq6pk6ovJZJnJSowzUefQZCeVaFgJTFJqy300JfCWA1OC");
+
+    const clientSecret = "pi_3UOJpvFesEkrvdhK0rh74vp4_secret_zkfqpI16VSJ26LIW3HM4vbWEv";
+
+    const elements = stripe.elements({
+        clientSecret: clientSecret
+    });
+
+    const paymentElement = elements.create("payment");
+    paymentElement.mount("#payment-element");
+
+    document.getElementById("pay-button").addEventListener("click", async () => {
+
+        const message = document.getElementById("message");
+
+        message.innerText = "Processing payment...";
+
+        const { error } = await stripe.confirmPayment({
+            elements: elements,
+            confirmParams: {
+                return_url: window.location.origin + "/payment-success.html"
+            }
+        });
+
+        if (error) {
+            message.innerText = "Payment failed: " + error.message;
+        }
+    });
+
+</script>
+
+</body>
+</html>

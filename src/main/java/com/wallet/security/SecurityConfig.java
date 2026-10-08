@@ -35,6 +35,8 @@ public class SecurityConfig {
         .permitAll()
         .antMatchers(HttpMethod.POST, "/api/stripe/webhook")
         .permitAll()
+        .antMatchers("/payment.html")
+        .permitAll()
         .antMatchers("/api/wallets/**", "/api/users/**")
         .hasRole("USER")
         .anyRequest()

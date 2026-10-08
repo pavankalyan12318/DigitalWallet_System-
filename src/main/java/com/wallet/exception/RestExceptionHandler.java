@@ -28,7 +28,8 @@ public class RestExceptionHandler {
 
   @ExceptionHandler(Exception.class)
   public ResponseEntity<Map<String, String>> serverError(Exception ex) {
-    return body(HttpStatus.INTERNAL_SERVER_ERROR, "Internal error");
+    ex.printStackTrace();
+    return body(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
   }
 
   private ResponseEntity<Map<String, String>> body(HttpStatus status, String message) {
