@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/wallet}
+    username: postgres
+    password: Pavankalyan@12345
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:change-me-to-a-long-random-secret-for-dev-only}
+    expiration-ms: ${JWT_EXPIRATION_MS:3600000}
+
+stripe:
+  api-key: ${STRIPE_API_KEY}
+  webhook-secret: whsec_4438b8d362e87796f37935cfd52e5071e634a15d08907718b9d4de0857e7b579
+  currency-default: usd
